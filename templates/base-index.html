@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'scss/common/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'scss/common/iconfont.css' %}">
+    <link rel="stylesheet" href="{% static 'scss/common/common.css' %}">
+    <link rel="stylesheet" href="{% static 'scss/index/index.css' %}">
+    {% block style-scss %}{% endblock %}
+</head>
+<body>
+{% include 'base-index-top.html' %}
+{% block content %}{% endblock %}
+{% include 'base-index-bottom.html' %}
+</body>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/headercontral.js' %}"></script>
+</html>

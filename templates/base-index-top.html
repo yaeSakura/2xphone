@@ -1,0 +1,110 @@
+{% load staticfiles %}
+{% block top %}
+<!--头部导航栏 开始-->
+    <header>
+        <div class="header-wrap">
+        <!--左边 开始-->
+        <div class="header-left">
+            <a href="/">
+                <img class="img-responsive" src="{% static 'images/common/logo.png' %}" alt="官网首页">
+            </a>
+        </div>
+        <!--左边 结束-->
+        <!--中间 开始-->
+        <div class="header-mid">
+            <ul>
+                {% for category in category_list %}
+                <li>
+                    <a href="{{ category.NavHref }}">
+                       {{ category.NavName }}
+                        <i></i>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!--中间 结束-->
+        <!--右边 开始-->
+        <div class="header-right">
+            <div class="search" id="index-search">
+                <span></span>
+            </div>
+            <div class="shop-car">
+                <span></span>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="user" style="background-color: red;">
+                <a href="/logout"><span></span></a>
+            </div>
+            {% else %}
+            <div class="user">
+                <a href="/login"><span></span></a>
+            </div>
+            {% endif %}
+        </div>
+        <!--右边 结束-->
+        <!--点击搜索按钮 开始-->
+            <div class="search-hidden">
+                <div class="top">
+                    <div class="hidden-input">
+                        <form action="">
+                            <input type="button" placeholder="">
+                            <input type="text">
+                        </form>
+                    </div>
+                    <div class="delete-btn"></div>
+                </div>
+                <div class="bottom">
+                    <ul>
+                        <li><a href="star-phone.htmml">oneplus5</a></li>
+                        <li><a href="#">super快闪充电器</a></li>
+                        <li><a href="#">oneplus 5保护壳</a></li>
+                        <li><a href="#">电子发票</a></li>
+                        <li><a href="#">纳税人识别号</a></li>
+                    </ul>
+                </div>
+            </div>
+        <!--点击搜索按钮 结束-->
+        <!--屏幕小于768 开始-->
+       <div class="less768">
+           <div class="shop-car"><span></span></div>
+            {% if request.user.is_authenticated %}
+            <div class="user" style="background-color: red;">
+                <a href="/logout"><span></span></a>
+            </div>
+            {% else %}
+            <div class="user">
+                <a href="/login"><span></span></a>
+            </div>
+            {% endif %}
+           <div class="fold" id="header-fold"><span ></span></div>
+       </div>
+        <!--屏幕小于768 结束-->
+        </div>
+    </header>
+<!--头部导航栏 结束-->
+<!--小屏幕下隐藏的部分 开始-->
+<div class="less768-menu dn">
+    <ul id="less768-ul">
+         {% for category in category_list %}
+                <li>
+                    <a href="{{ category.NavHref }}">
+                       {{ category.NavName }}
+                        <i></i>
+                    </a>
+                </li>
+         {% endfor %}
+    </ul>
+    <div class="arrow-down" id="less768-header-arrow-down">
+        <i class="superfont icon-packup"></i>
+    </div>
+    <div class="less768-menu-form">
+        <form action="">
+            <input type="text" placeholder="搜索您的商品名称" id="less768-input-txt">
+            <input type="submit" value="&nbsp;">
+        </form>
+    </div>
+</div>
+<!--小屏幕下隐藏的部分 结束-->
+<div class="filter" id="filter"></div>
+{% endblock %}
