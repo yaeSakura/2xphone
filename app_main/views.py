@@ -13,7 +13,8 @@ from itsdangerous import URLSafeTimedSerializer as utsr
 from django.core.mail import send_mail
 from phone_2x.settings import SECRET_KEY, EMAIL_HOST_USER, DEFAULT_FROM_EMAIL, MEDIA_URL, MEDIA_ROOT
 
-
+import logging
+logger = logging.getLogger('main.views')
 # Create your views here.
 
 # 全局加载设置
@@ -45,7 +46,7 @@ def index(request):
     try:
         hot_blog_articles = Article.objects.order_by("-click_count").all()[:3]
     except Exception as e:
-        print e
+        logger.error(e)
     return render(request, 'index.html', locals())
 
 
@@ -56,7 +57,7 @@ def do_reg(request):
         if request.method == 'POST':
             reg_form = RegForm(request.POST)
             if reg_form.is_valid():
-                print '-' * 50
+                # print '-' * 50
                 cd = reg_form.cleaned_data
                 username, password, email = cd['username'], cd['password'], cd['email']
                 user = User.objects.create(username=username, password=make_password(password), email=email,
@@ -79,7 +80,7 @@ def do_reg(request):
         else:
             reg_form = RegForm()
     except Exception as e:
-        print e
+        logger.error(e)
     return render(request, 'sign.html', locals())
 
 
@@ -94,7 +95,7 @@ def active_user(request, token):
         user = User.objects.get(username=username)
     except User.DoesNotExist:
         return HttpResponse(u'对不起，您所验证的用户不存在，请重新注册')
-    print user.username
+    # print user.username
     user.is_active = True
     user.save()
     return HttpResponseRedirect(reverse(do_login))
@@ -120,7 +121,7 @@ def do_login(request):
         login_form = LoginForm()
         return render(request, 'login.html', locals())
     except Exception as e:
-        print e
+        logger.error(e)
 
 
 # 退出
@@ -128,5 +129,5 @@ def do_logout(request):
     try:
         logout(request)
     except Exception as e:
-        print e
+        logger.error(e)
     return HttpResponseRedirect(reverse(index))

@@ -28,7 +28,7 @@ class RegForm(forms.Form):
         user = cleaned_data["username"]
         if User.objects.filter(username=user).all():
             raise forms.ValidationError(u'该用户名已存在！')
-        print password, password2
+        # print password, password2
         if password != password2:
             raise forms.ValidationError(u"两次密码必须一致")
         return cleaned_data

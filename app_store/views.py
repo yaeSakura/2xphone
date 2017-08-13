@@ -61,7 +61,7 @@ def product_details(request, id):
             raise Http404
 
     except Exception as e:
-        pass
+        logger.error(e)
     return render(request, 'product_details.html', locals())
 
 # @csrf_exempt
