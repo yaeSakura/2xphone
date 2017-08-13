@@ -1,6 +1,5 @@
 {% load staticfiles %}
 {% block top %}
-<!--头部导航栏 开始-->
     <header>
         <div class="header-wrap">
         <!--左边 开始-->
@@ -32,15 +31,21 @@
             <div class="shop-car">
                 <span></span>
             </div>
-            {% if request.user.is_authenticated %}
-            <div class="user" style="background-color: red;">
-                <a href="/logout"><span></span></a>
-            </div>
-            {% else %}
-            <div class="user">
-                <a href="/login"><span></span></a>
-            </div>
-            {% endif %}
+                {% if request.user.is_authenticated %}
+                <div class="user">
+                    <span style="display: none;"></span>
+                    <span style="display: block;" class="j-loginin"></span>
+                    <ul class="logout">
+                        <li>我的订单</li>
+                        <li>super账户</li>
+                        <li><a href="/logout">退出</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                <div class="user">
+                    <a href="/login"><span></span></a>
+                </div>
+                {% endif %}
         </div>
         <!--右边 结束-->
         <!--点击搜索按钮 开始-->
@@ -56,11 +61,11 @@
                 </div>
                 <div class="bottom">
                     <ul>
-                        <li><a href="star-phone.htmml">oneplus5</a></li>
+                        <li><a href="/oneplus5/">oneplus5</a></li>
                         <li><a href="#">super快闪充电器</a></li>
                         <li><a href="#">oneplus 5保护壳</a></li>
-                        <li><a href="#">电子发票</a></li>
-                        <li><a href="#">纳税人识别号</a></li>
+                        <li><a href="/service/">电子发票</a></li>
+                        <li><a href="/service/">纳税人识别号</a></li>
                     </ul>
                 </div>
             </div>
@@ -69,15 +74,21 @@
        <div class="less768">
            <div class="shop-car"><span></span></div>
             {% if request.user.is_authenticated %}
-            <div class="user" style="background-color: red;">
-                <a href="/logout"><span></span></a>
-            </div>
+                <div class="user">
+                    <span style="display: none;"></span>
+                    <span style="display: block;" class="j-loginin"></span>
+                    <ul class="logout">
+                        <li>我的订单</li>
+                        <li>super账户</li>
+                        <li><a href="/logout">退出</a></li>
+                    </ul>
+                </div>
             {% else %}
             <div class="user">
                 <a href="/login"><span></span></a>
             </div>
             {% endif %}
-           <div class="fold" id="header-fold"><span ></span></div>
+           <div class="fold" id="header-fold"><span></span></div>
        </div>
         <!--屏幕小于768 结束-->
         </div>
@@ -106,5 +117,4 @@
     </div>
 </div>
 <!--小屏幕下隐藏的部分 结束-->
-<div class="filter" id="filter"></div>
 {% endblock %}

@@ -22,7 +22,23 @@
   width: 50%;
   padding: 0 30px  0 0;
   border-right: 1px solid #dfdfdf;
-  label{display: block}
+  label{
+    display: block;
+    position: relative;
+    span{
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 12px;
+      color: #cb0028;
+      z-index: 2;
+      background: #fed9d9;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 20px;
+      display: none;
+    }
+  }
   input{
     background: #fcfcfc;
     font-size: 14px;
@@ -50,18 +66,35 @@
   text-align: right;
 }
 .login_btn{
-  background: #eb0028;
   width: 100%;
   height: 50px;
   text-align: center;
   line-height: 50px;
   border-radius: 4px;
   margin: 14px 0 12px;
-  a{
+  position: relative;
+  button{
     display: block;
     color: #ffffff;
     font-size: 14px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #eb0028;
+    &:before{
+      content: '';
+      width: 1px;
+      background: rgba(215,2,38,0.4);
+      transition: width .15s ease 0s;
+      position: absolute;
+      height: 100%;
+      top:0;left: 0
+    }
+    &:hover:before{
+      width: 100%;
+    }
   }
+
 }
 .login_sign{
   color: #666;
@@ -83,6 +116,22 @@
     border: 1px solid #dfdfdf;
     color: #333;
     cursor: pointer;
+    position: relative;
+    &:before{
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: #000;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    &:hover:before{
+      opacity: .1;
+      transition: opacity .2s;
+    }
   }
   i{
     display: inline-block;
@@ -113,9 +162,6 @@
   .login_btn{
     border-radius: 0;
   }
-  .login_forget{
-    display: none;
-  }
   .sign_agree{
     font-size: 12px;
     color: #5e5e5e;
@@ -127,12 +173,12 @@
       }
     }
   }
-  .login_sign{
-    display: none;
+  .login_drag{
+    width: 300px;
   }
 }
 .sign_login{
-  display: block;
+  //display: block;
   height: 20px;
   width: 100%;
   text-align: right;
@@ -151,7 +197,12 @@
     color: #eb0028;
   }
 }
-//login
+.login{
+  .bgred{
+    background: #fed9d9;
+  }
+}
+
 @media screen and (max-width: 740px){
   .login{
     .login_box{
@@ -168,5 +219,4 @@
     float: none;
     border: none;
   }
-
 }

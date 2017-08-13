@@ -1,16 +1,42 @@
 {% load staticfiles %}
 <div class="pagination">
     {% if article_list.has_previous %}
-    <a class="prev focus" href="?page={{ article_list.previous_page_number }}"><</a>
+    <a class="prev" href="?page={{ article_list.previous_page_number }}"><</a>
     {% endif %}
-    <a class="focus" href="">1</a>
-    <a href="">2</a>
-    <a href="">3</a>
-    <a href="">4</a>
-    <a href="">5</a>
-    <a class="eclipse" href="">···</a>
-    <a href="">{{ article_list.number }}</a>
-    {% if article_list.has.next %}
+    {% for pag in total_pag_list %}
+    {% if pag == article_list.number %}
+        <a class="focus" href="?page={{ pag }}">{{ pag }}</a>
+    {% else %}
+        <a href="?page={{ pag }}">{{ pag }}</a>
+    {% endif %}
+    {% endfor %}
+    {% if article_list.has_next %}
     <a class="next" href="?page={{ article_list.next_page_number }}">></a>
     {% endif %}
 </div>
+
+{#<div class="pagination">#}
+{#    {% if article_list.has_previous %}#}
+{#        <a class="prev" href="?page={{ article_list.previous_page_number }}"><</a>#}
+{#        {% else %}#}
+{#        <a class="prev focus" href="?page=1">1</a>#}
+{#        <a class="" href="?page=2">2</a>#}
+{#    {% endif %}#}
+{#    {% if article_list.has_previous and article_list.has_next %}#}
+{#            <a href="?page={{ article_list.number | add:-1 }}">{{ article_list.number | add:-1 }}</a>#}
+{#            <a class="prev focus" href="?page={{ article_list.number }}">{{ article_list.number }}</a>#}
+{#            <a href="?page={{ article_list.number | add:1 }}">{{ article_list.number | add:1 }}</a>#}
+{#    {% endif %}#}
+{#    {% if article_list.has_next %}#}
+{#        <a class="next" href="?page={{ article_list.next_page_number }}">></a>#}
+{#    {% else %}#}
+{#        <a class="" href="{{ article_list.paginator.num_pages | add:-1 }}">{{ article_list.paginator.num_pages | add:-1  }}</a>#}
+{#        <a class="prev focus" href="{{ article_list.paginator.num_pages }}">{{ article_list.paginator.num_pages }}</a>#}
+{#    {% endif %}#}
+{#</div>#}
+
+{#    <a href="">3</a>#}
+{#    <a href="">4</a>#}
+{#    <a href="">{{ article_list.paginator.num_pages }}</a>#}
+{#    <a class="eclipse" href="">···</a>#}
+{#    <a href="">{{ article_list.number }}</a>#}

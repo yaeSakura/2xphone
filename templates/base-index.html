@@ -14,9 +14,11 @@
 </head>
 <body>
 {% include 'base-index-top.html' %}
+{% block content_top %}{% endblock %}
 {% block content %}{% endblock %}
 {% include 'base-index-bottom.html' %}
 </body>
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/headercontral.js' %}"></script>
+{% block script_js %}{% endblock %}
 </html>

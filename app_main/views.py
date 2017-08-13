@@ -2,6 +2,7 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from forms import *
 from .models import *
+from app_blog.models import Article
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login, logout, authenticate
 from django.core.urlresolvers import reverse
@@ -11,12 +12,15 @@ from itsdangerous import URLSafeTimedSerializer as utsr
 
 from django.core.mail import send_mail
 from phone_2x.settings import SECRET_KEY, EMAIL_HOST_USER, DEFAULT_FROM_EMAIL, MEDIA_URL, MEDIA_ROOT
+
+
 # Create your views here.
 
 # 全局加载设置
 def global_setting(request):
     category_list = NavBars.objects.all()
     return locals()
+
 
 # 邮件验证连接编码
 class Token(object):
@@ -32,10 +36,16 @@ class Token(object):
         serializer = utsr(self.security_key)
         return serializer.loads(token, salt=self.salt, max_age=expiration)
 
+
 token_confirm = Token(SECRET_KEY)
+
 
 def index(request):
     title = 'super + 首页'
+    try:
+        hot_blog_articles = Article.objects.order_by("-click_count").all()[:3]
+    except Exception as e:
+        print e
     return render(request, 'index.html', locals())
 
 
@@ -49,7 +59,8 @@ def do_reg(request):
                 print '-' * 50
                 cd = reg_form.cleaned_data
                 username, password, email = cd['username'], cd['password'], cd['email']
-                user = User.objects.create(username=username, password=make_password(password), email=email, is_active=False)
+                user = User.objects.create(username=username, password=make_password(password), email=email,
+                                           is_active=False)
                 # user.backend = 'django.contrib.auth.backends.ModelBackend'  # 指定的默认登录方式
                 # login(request, user)
                 # return HttpResponse('注册成功！')
@@ -59,7 +70,7 @@ def do_reg(request):
                 token = token_confirm.generate_validate_token(username)
                 print token
                 message = "\n".join([u'亲爱的{0},欢迎加入super+手机大家庭'.format(username), u'请访问该链接，完成用户验证：',
-                                     '/'.join(['http://127.0.0.1:8000', 'account/activate', token])])
+                                     '/'.join(['www.hzqsakura.cc', 'account/activate', token])])
                 send_mail(u'注册用户验证信息', message, DEFAULT_FROM_EMAIL, [email])
                 # return render(request, 'index.html', locals())
                 return HttpResponse(u"请登录到注册邮箱中验证用户，有效期为1个小时。")
@@ -70,6 +81,7 @@ def do_reg(request):
     except Exception as e:
         print e
     return render(request, 'sign.html', locals())
+
 
 # 激活用户
 def active_user(request, token):
@@ -86,6 +98,7 @@ def active_user(request, token):
     user.is_active = True
     user.save()
     return HttpResponseRedirect(reverse(do_login))
+
 
 # 登录
 def do_login(request):
@@ -109,6 +122,7 @@ def do_login(request):
     except Exception as e:
         print e
 
+
 # 退出
 def do_logout(request):
     try:
@@ -116,15 +130,3 @@ def do_logout(request):
     except Exception as e:
         print e
     return HttpResponseRedirect(reverse(index))
-
-# 商城
-def store(request):
-    return render(request, 'store.html', locals())
-
-
-# 服务
-def service(request):
-    return render(request, 'service.html', locals())
-
-
-

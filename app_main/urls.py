@@ -17,9 +17,6 @@ from django.conf.urls import url
 from app_main.views import *
 
 urlpatterns = [
-    url(r'^store$', store, name='store'),
-    url(r'^service$', service, name='service'),
-    # url(r'^blog$', blog, name='blog'),
     url(r'^login$', do_login, name='login'),
     url(r'^reg$', do_reg, name='reg'),
     url(r'^logout$', do_logout, name='logout'),

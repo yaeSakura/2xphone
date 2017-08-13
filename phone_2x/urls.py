@@ -25,5 +25,8 @@ urlpatterns = [
     url(r'^admin/upload/(?P<dir_name>[^/]+)$', upload_image, name='upload_image'),
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('app_blog.urls')),
+    url(r'^store/', include('app_store.urls')),
+    url(r'^service/', include('app_service.urls')),
+    url(r'^oneplus5/', include('OnePlus5.urls')),
     url(r'^', include('app_main.urls')),
 ]

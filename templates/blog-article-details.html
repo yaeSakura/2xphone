@@ -1,0 +1,184 @@
+{% extends 'base-index.html' %}
+{% load staticfiles %}
+{% block style-scss %}
+    <!--blog-->
+    <link href="{% static 'scss/blog/blog.css' %}" rel="stylesheet">
+    <!--blog home-->
+    <link rel="stylesheet" href="{% static 'scss/blog/blog-home&news.css' %}">
+    <!--blog details-->
+    <link rel="stylesheet" href="{% static 'scss/blog/article-details.css' %}">
+{% endblock %}
+{% block content_top %}
+<div class="filter" id="filter"></div>
+<!--banner-->
+<div class="banner banner-blog">
+    <h2>STAR-PHONE<br>BLOG</h2>
+</div>
+<!--sub nav-->
+<div class="sub-nav">
+    <ul class="clearfix">
+        {% for nav in navbars %}
+            <li><a href="{{ nav.NavHref }}">{{ nav.NavName }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+{% block content %}
+<!--main-->
+<div class="tab-page">
+    <div class="page-container clearfix">
+        <!--search box-->
+        {% include 'base-blog-search.html' %}
+        <!--article-->
+        <div class="article">
+            <!--article main-->
+            <div class="article-inner">
+                <!--article cell for details-->
+                <div class="article-cell">
+                    <!--article title-->
+                    <div class="article-title"><a href="">{{ article.title | slice:'0:30' }}</a></div>
+                    <!--article author and share-->
+                    <div class="article-source">
+                        <span class="article-origin">
+                            <span class="article-year">{{ article.date_publish | date:"Y. m. j" }}
+                                <span class="article-time">{{ article.date_publish | date:"H:i"}}</span></span>
+                            <span class="article-author">By: {{ article.author }}</span>
+                        </span>
+                        <ul class="article-share clearfix">
+                            <li><a href="">
+                                <i class="icon i-like"></i>
+                                <span class="like-count">{{ article.collect_count }}</span>
+                            </a></li>
+                            <li><a>
+                                <i class="icon i-praise"></i>
+                                <span class="praise-count">{{ article.click_count }}</span>
+                            </a></li>
+                        </ul>
+                    </div>
+{#                    <a class="img-wrap" href=""><img src="{% static 'images/blog/720.jpg' %}" alt=""></a>#}
+                    <div class="article-text">
+                        {% autoescape off %}
+                        {{ article.content }}
+                        {% endautoescape %}
+                    </div>
+                    <ul class="details-share clearfix">
+                        <li><a class="share-sina" href="javascript:void(0);"></a></li>
+                        <li><a class="share-qzone" href="javascript:void(0);"></a></li>
+                        <li><a class="share-douban" href="javascript:void(0);"></a></li>
+                        <li><a class="share-wechat" href="javascript:void(0);"></a></li>
+                    </ul>
+                    <div class="details-switch">
+                        {% if article.id > 1 %}
+                        <a class="switch-prev" href="/blog/article/{{ article.id | add:-1 }}">上一篇</a>
+                        {% endif %}
+                        {% if article.id < count %}
+                        <a class="switch-next" href="/blog/article/{{ article.id | add:1 }}">下一篇</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!--article comments-->
+                <div class="article-comments">
+                    <div class="article-comments-textarea">
+                        <form action="/blog/comment/{{ article.id }}" method="post">
+                            {% csrf_token %}
+                            <div class="textarea-input">
+                                <div class="textarea-input-avatar">
+                                    <div class="avatar-img"></div>
+                                </div>
+                                <div class="textarea-input-text">
+                                    <textarea class="" name="text" title="text" placeholder="我想说···"></textarea>
+                                </div>
+                            </div>
+                            <div class="textarea-info">
+                                <div class="textarea-words">0<span>/150</span></div>
+                                <button class="textarea-submit" type="submit">回复</button>
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="article-comments-counts">
+                        <li>全部评论（<span>{{ all_comments }}</span>）</li>
+                        <li>我的评论（<span>{{ my_comments }}</span>）</li>
+                    </ul>
+                    <ul class="article-comments-lists">
+                        {% for comment in comment_list %}
+                        <li>
+                            <div class="lists-item">
+                                <div class="avatar-img"></div>
+                                <div class="lists-item-content">
+                                    <div class="lists-item-content-head">
+                                        <span class="head-left">
+                                            {{ comment.username }}
+                                            <span class="article-time">{{ comment.date_publish | date:"Y.m.j H:i" }}</span>
+                                        </span>
+                                        <span class="head-right"></span>
+                                    </div>
+                                    <div class="lists-item-content-desc">
+                                        {{ comment.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% for children_comment in comment.children_comment %}
+                            <div class="lists-item">
+                                <div class="avatar-img"></div>
+                                <div class="lists-item-content">
+                                    <div class="lists-item-content-head">
+                                        <span class="head-left">
+                                            {{ children_comment.username }}
+                                            <span class="article-time">{{ children_comment.date_publish | date:"Y.m.j H:i" }}</span>
+                                        </span>
+                                        <span class="head-right"></span>
+                                    </div>
+                                    <div class="lists-item-content-desc">
+                                     {{ children_comment.content }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="reply-box">
+                                <div class="article-comments-textarea">
+                                    <form action="/blog/child_comment/{{ comment.user_id }}/{{ article.id }}" method="post">
+                                        {% csrf_token %}
+                                        <div class="textarea-input">
+                                            <div class="textarea-input-avatar">
+                                                <div class="avatar-img"></div>
+                                            </div>
+                                            <div class="textarea-input-text">
+                                                <textarea class="" name="child_text" title="text"
+                                                          placeholder="我想说···"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="textarea-info">
+                                            <div class="textarea-words">0<span>/150</span></div>
+                                            <div class="reply-buttons">
+                                                <button class="textarea-cancel">取消</button>
+                                                <button class="textarea-submit" type="submit">回复</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <!--load more comments-->
+                    <div class="load-more">
+                        <a href="">查看更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--recommendation-->
+        {% include 'base-blog-hot.html' %}
+    </div>
+</div>
+{% endblock %}
+{% block script_js %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/headercontral.js' %}"></script>
+<script src="{% static 'js/blog.js' %}"></script>
+<script>
+    $(".head-right").click(function () {
+        $(this).parents("li").find(".reply-box").toggleClass("active");
+    });
+</script>
+{% endblock %}

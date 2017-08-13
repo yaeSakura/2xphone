@@ -1,0 +1,65 @@
+{% extends 'base-index.html' %}
+{% load staticfiles %}
+{% block style-scss %}
+    <!--blog-->
+    <link href="{% static 'scss/blog/blog.css' %}" rel="stylesheet">
+    <!--blog home-->
+    <link rel="stylesheet" href="{% static 'scss/blog/blog-picture.css' %}">
+    <!--picture details-->
+    <link rel="stylesheet" href="{% static 'scss/blog/picture-details.css' %}">
+{% endblock %}
+{% block content_top %}
+<div class="filter" id="filter"></div>
+<!--banner-->
+<div class="banner banner-picture">
+    <h2>STAR-PHONE<br>PICTURE</h2>
+</div>
+<!--sub nav-->
+<div class="sub-nav">
+    <ul class="clearfix">
+        {% for nav in navbars %}
+            <li><a href="{{ nav.NavHref }}">{{ nav.NavName }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+{% block content %}
+<!--main-->
+<div class="tab-page">
+    <div class="page-container">
+
+        <div class="picture-inner">
+            <!--product title-->
+             {% for picture2 in picture2_list %}
+            <div class="product-title">
+
+
+                <div class="product-title-img">
+                    <img src="/uploads/{{ picture2.img2_url }} " alt="star-phone">
+                </div>
+
+                <div class="product-title-content">
+                    <h1>{{ picture2.name }}</h1>
+                    <p class="product-title-content-desc">{{ picture2.phone }}</p>
+                    <a href="">查看详情</a>
+                </div>
+
+            </div>
+            <!--product show-->
+            <div class="product-picbox">
+                <h3>图片下载</h3>
+                {% autoescape off %}
+                    {{ picture2.content }}
+                {% endautoescape %}
+{#                <ul class="product-picbox-inner">#}
+
+{#                    <li><a href=""><img src="/uploads/{{ picture2.content }}">{% endautoescape %}</a></li>#}
+
+{#                </ul>#}
+
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

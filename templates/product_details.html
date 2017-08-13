@@ -1,0 +1,257 @@
+{% extends 'base-index.html' %}
+{% load staticfiles %}
+{% block style-scss %}
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_30rwi7m4qb0529.css">
+    <link rel="stylesheet" href="{% static 'scss/product-details/products-dails.css' %}">
+{% endblock %}
+{% block content %}
+<div class="filter" id="filter"></div><!--滤镜-->
+<!--立即购买 开始-->
+<section class="selection">
+    <div class="wild-box flex-box">
+        <div class="leftbox">
+            {% for phone_img in product_top %}
+            <div class="left-imgshow">
+                <div class="big-img ">
+                    <a class="btnleft">
+                        <i class="iconfont icon-fanhui iconleft"></i>
+                    </a>
+                    <div class="pic">
+                        <img src="{{ phone_img.img_url1.url }}" alt="" class="op1">
+                        <img src="{{ phone_img.img_url2.url }}" alt="">
+                        <img src="{{ phone_img.img_url3.url }}" alt="">
+                        <img src="{{ phone_img.img_url4.url }}" alt="">
+                    </div>
+                    <a class="btnright">
+                        <i class="iconfont icon-gengduo iconright"></i>
+                    </a>
+                </div>
+                <div class="small-img ">
+                    <a>
+                        <img src="{{ phone_img.img_url1.url }}" alt="">
+                    </a>
+                    <a>
+                        <img src="{{ phone_img.img_url2.url }}" alt="">
+                    </a>
+                    <a>
+                        <img src="{{ phone_img.img_url3.url }}" alt="">
+                    </a>
+                    <a>
+                        <img src="{{ phone_img.img_url4.url }}" alt="">
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="left-imgshow dflex" id="normal-show">
+                <div class="big-img ">
+                    <div class="pic">
+                        <img src="{{ product_top_all.small_img.url }}" alt="" class="op1">
+                    </div>
+                </div>
+                <div class="small-img ">
+                    <a>
+                        <img src="{{ product_top_all.small_img.url }}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="right-info">
+            <h1>OnePlus 5 个性保护壳 <span>{{ sjk.color }}</span></h1>
+            <p class="info-subtitle"></p>
+            <div class="price">99.00</div>
+            <div class="option">
+                <dl>
+                    <dt class="color-des">颜色 - <span>砂岩黑</span></dt>
+                    <dd class="color-choice" id="buynow">
+                        {% for phone_color in product_top %}
+                        <a class="change_color" id="{{ phone_color.id }}">
+                            <img src="{{ phone_color.color_img.url }}" alt="">
+                        </a>
+                        {% endfor %}
+{#                        <a>#}
+{#                            <img src="{% static 'images/product-dails/colorchoice2.jpg' %}" alt="">#}
+{#                        </a>#}
+{#                        <a>#}
+{#                            <img src="{% static 'images/product-dails/colorchoice3.jpg' %}" alt="">#}
+{#                        </a>#}
+{#                        <a>#}
+{#                            <img src="{% static 'images/product-dails/colorchoice4.jpg' %}" alt="">#}
+{#                        </a>#}
+                    </dd>
+                </dl>
+            </div>
+            <div class="btngroup clearfix">
+                <div class="btn">
+                    <a href="#" class="buynow">立即购买</a>
+                    <a href="#" class="arrival-notice">到货通知</a>
+                </div>
+                <dl class="share">
+                    <dt id="share">
+                        <i class="i-con i-shar"></i>
+                    </dt>
+                    <dd class="shareway" id="shareway">
+                        <a href="#"><i class="i-con i-qqzone"></i></a>
+                        <a href="#"><i class="i-con i-sina"></i></a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+<!--菜单选择 开始-->
+<section class="menu" id="pro-menu">
+    <ul>
+        <li><a href="#dails">商品详情</a></li>
+        <li><a href="#parameter">规格参数</a></li>
+        <li><a href="#fag">常见问题</a></li>
+    </ul>
+</section>
+<!--商品详情 开始-->
+<a name="dails"></a>
+<section class="product-dails clearfix">
+    <div class="product-des">
+        <h2>让 OnePlus 5 别具一格</h2>
+        <p>材质与手感俱佳，个性和保护兼得，这就是 OnePlus 的个性保护壳。现在，4 种不同材质，不拘一格，让你的OnePlus 5看起来别具一格。
+        </p>
+    </div>
+    <div class="product-img">
+    </div>
+</section>
+<!--详情2 开始-->
+<section class="product-two">
+    <div class="swiper-btn">
+        <span class="color-choice active"></span>
+        <span class="color-choice "></span>
+        <span class="color-choice "></span>
+        <span class="color-choice "></span>
+    </div>
+    <div class="pro-two-box">
+        <div class="product-two-bg img-active">
+            <div class="product-des">
+                <h2>手感，把玩无厌。</h2>
+                <p>黑檀红褐色与黑色相间，纹理行云流水，色泽沉稳大气。采用浸脂工艺，超高温高压一体成
+                    型，与手机完好贴合。</p>
+            </div>
+            <div class="product-pic pic1"></div>
+        </div>
+        <div class="product-two-bg">
+            <div class="product-des">
+                <h2>极客气质与精神的先锋代表</h2>
+                <p>军用、航天级的芳纶纤维材料，为手机提供贴心的保护。三重工艺，刚柔并济，完好保留几何美感的编织纹理，更带来舒适的类肤质感。</p>
+            </div>
+            <div class="product-pic pic2"></div>
+        </div>
+        <div class="product-two-bg">
+            <div class="product-des">
+                <h2>第 5 代砂岩手感传承</h2>
+                <p>流畅的开口设计，精雕孔位对齐，热熔热压 logo，历经无数次改模、打样、测试，终将保护壳棱线与机身做到一致…… 4 层喷砂，手感，依然触动人心。</p>
+            </div>
+            <div class="product-pic pic3"></div>
+        </div>
+        <div class="product-two-bg">
+            <div class="product-des">
+                <h2>质感，依然出众。</h2>
+                <p>酸枝色泽金黄，纹理清晰，汇聚万千变化。浸脂工艺，让纹理与触感得以留存，也将酸枝的良好手感，传至你掌心。</p>
+            </div>
+            <div class="product-pic pic4"></div>
+        </div>
+    </div>
+
+</section>
+<!--详情3 开始-->
+<section class="product-three clearfix">
+    <div class="img-show">
+        <ul class="clearfix" id="pro3-imgshow">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="btn" id="btn">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</section>
+<!--规格参数 开始-->
+<a name="parameter"></a>
+<section class="specification">
+    <table>
+        <tr>
+            <td>尺寸</td>
+            <td>153.2*75.8*8.2mm，154.2*76.2*8.8mm （砂岩黑）</td>
+        </tr>
+        <tr>
+            <td>重量</td>
+            <td>11g，16g （砂岩黑）</td>
+        </tr>
+        <tr>
+            <td>材质</td>
+            <td>芳纶纤维，木质，PC</td>
+        </tr>
+    </table>
+</section>
+<!--常见问题 开始-->
+<a name="fag"></a>
+<section class="fag">
+    <div class="wrap">
+        <div class="fag-totle">
+            <div class="item">
+                <div class="left">三包服务介绍</div>
+                <div class="right">
+                    <ul class="fag-des">
+                        <li>
+                            承保周期：充电器、数据线、移动电源、耳机（有线/无线耳机），自签收之日起，可享受七天无理由退货，十五天换货，一年内保修（森海塞尔耳机两年内保修）；皮套、保护壳、屏幕保护膜、所有生活馆商品，自签收之日起，可享受七天无理由退货，十五天换货。
+                        </li>
+                        <li>
+                            退换货要求：商品及包装保持一加出售时原状、配件及单据完好、齐全，并提供相关订单号、发票及三包凭证；非产品问题的退换，需产品包装完好，且仅退换一次，消费者承担邮费；产品问题的退换，请先联系一加人工客服，确认产品问题后，提供退换相关凭证，使用指定物流到付的方式寄回给一加。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item">
+                <div class="left">签收注意事项<br/>(签收时请注意以下信息 )</div>
+                <div class="right">
+                    <ul class="fag-des">
+                        <li>
+                            若存在包装破损等影响签收的原因，请直接拒收，并及时联系一加人工客服协助处理；
+                        </li>
+                        <li>
+                            签收后请尽快查看商品（配件、发票、三包凭证等）是否完整，若发现商品错误、商品少发、商品表面有质量问题等，请于24小时内联系一加人工客服协助处理。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item">
+                <div class="left">退货办理流程</div>
+                <div class="right">
+                    <ul class="fag-des">
+                        <li>
+                            根据三包政策，符合退换货条件的，请拨打400-888-1111或通过商城在订单中心申请退换货，提供三包的相关凭证，会有专门的人员为您进行处理。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script_js %}
+    <script src="{% static 'js/product-dails.js' %}"></script>
+{#    <script>#}
+{#        $('.change_color').click(function () {#}
+{#            var id = $('.change_color').attr('id');#}
+{#            console.log(id);#}
+{#            $.ajax({#}
+{#                url:"http://127.0.0.1:8000/store/change_color/",#}
+{#                type:"post",#}
+{#                data:id,#}
+{#                success:function () {#}
+{#                    console.log('success get messsage')#}
+{#                }#}
+{#            })#}
+{#        })#}
+{#    </script>#}
+{% endblock %}

@@ -55,7 +55,7 @@ class ArticleManager(models.Manager):
         return distinct_date_list
 
 
-# 文章模型
+# 文章模型加新闻
 class Article(models.Model):
     author = models.CharField(max_length=20, verbose_name='作者名字', null=False)
     title = models.CharField(max_length=50, verbose_name='文章标题', null=False)
@@ -83,6 +83,7 @@ class Article(models.Model):
 # 评论模型
 class Comment(models.Model):
     content = models.TextField(verbose_name='评论内容')
+    username = models.CharField(max_length=30, blank=True, null=True, verbose_name='评论用户名')
     user = models.ForeignKey(User, blank=True, null=True, verbose_name='登录用户')
     date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
     article = models.ForeignKey(Article, blank=True, null=True, verbose_name='关联文章')
@@ -96,20 +97,62 @@ class Comment(models.Model):
     def __unicode__(self):
         return str(self.id)
 
+# 产品图片系列
+class Series(models.Model):
+    title = models.CharField(max_length=50, verbose_name='系列标题')
+
+    class Meta():
+        verbose_name = "产品系列"
+        verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return self.title
+
+# 产品图片
+class Picture(models.Model):
+    name = models.CharField(max_length=50, verbose_name='手机名字')
+    img_url = models.ImageField(upload_to='uploads/', verbose_name='手机图片')
+    category = models.ForeignKey(Category, blank=True, null=True, verbose_name='分类')
+    series = models.ForeignKey(Series, verbose_name='系列')
+
+    class Meta():
+        verbose_name = "产品图片"
+        verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return self.name
+
+class Picture2(models.Model):
+    name = models.CharField(max_length=50, verbose_name='手机名字')
+    phone = models.CharField(max_length=500, verbose_name='手机描述')
+    img2_url = models.ImageField(upload_to='uploads/', verbose_name='手机图片2')
+    content = models.TextField(verbose_name='图片下载')
+    category = models.ForeignKey(Category, blank=True, null=True, verbose_name='分类')
+    series = models.ForeignKey(Series, verbose_name='系列')
+    Picture = models.ForeignKey(Picture, verbose_name='产品图片1')
+
+    class Meta():
+        verbose_name = "产品图片2"
+        verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return self.name
 
 #　视频模型
-#
-# class Video(models.Model):
-#     name = models.CharField(max_length=30)
-#     video_url = models.CharField(u'视频资源URL',max_length=200)
-#     video_length = models.IntegerField(u'视频长度')
-#
-#     class Meta():
-#         verbose_name = '视频'
-#         verbose_name_plural =verbose_name
-#
-#     def __str__(self):
-#         return self.name.encode('utf-8')
+
+class Video(models.Model):
+    name = models.CharField(max_length=30)
+    img_url = models.ImageField(upload_to='blog/video/%Y/%m', blank=True)
+    video_url = models.CharField(u'视频资源URL', max_length=200)
+    video_length = models.IntegerField(u'视频长度')
+    # ass = models.URLField()
+
+    class Meta():
+        verbose_name = '视频'
+        verbose_name_plural =verbose_name
+
+    def __unicode__(self):
+        return self.name
 
 
 #产品图片
@@ -127,21 +170,3 @@ class Comment(models.Model):
 #         return self.title.encode('utf-8')
 
 
-# 新闻　
-#
-# class News(models.Model):
-#     title = models.CharField(max_length=50, verbose_name='新闻标题')
-#     desc = models.CharField(max_length=50, verbose_name='新闻描述')
-#     content = models.TextField(verbose_name='新闻内容')
-#     click_count = models.IntegerField(default=0, verbose_name='点击次数')
-#     is_recommend = models.BooleanField(default=False, verbose_name='是否推荐')
-#     date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
-#     user = models.ForeignKey(UserInfo, verbose_name='用户')
-#     collect_count = models.IntegerField(default=0, verbose_name=u'收藏次数')
-#
-#     class Meta():
-#         verbose_name = '新闻'
-#         verbose_name_plural = verbose_name
-#
-#     def __unicode__(self):
-#         return self.title

@@ -18,7 +18,15 @@ from app_blog.views import *
 
 urlpatterns = [
     url(r'^video$', video, name='video'),
-    url(r'^product$', product, name='product'),
+    url(r'^picture$', picture, name='picture'),
+    url(r'^picture_details/(?P<id>[\d]+)$', picture_details, name='picture_details'),
     url(r'^news$', news, name='news'),
+    # url(r'^collection/(?P<id>[\w]+)$', collection_time, name='collection'),
+    url(r'^collection$', collection_time, name='collection'),
+    url(r'^search$', blog_search, name='search'),
+    url(r'^article/(?P<id>[\d]+)$', blog_detail, name='article'),
+    url(r'^comment/(?P<id>[\d]+)$', comment_post, name='comment_post'),
+    url(r'^child_comment/(?P<userid>[\d]+)/(?P<artid>[\d]+)$', child_comment_post, name='child_comment_post'),
+    url(r'^movie/(?P<id>\d+)/$', movie, name='movie'),
     url(r'^', blog, name='blog'),
 ]

@@ -33,27 +33,15 @@
 <!--第四部分主体 开始-->
 <section class="section-four">
     <div class="section-four-box">
-    <a href="#">
-        <img  src="{% static 'images/index/index-six.jpg' %}" alt="">
-        <div class="tit-desc-panel">
-        <h4>博客</h4>
-        <p>为什么 OnePlus 5 的灰色，要比以往更深一些？</p>
-        </div>
-    </a>
-    <a href="#">
-        <img  src="{% static 'images/index/index-six.jpg' %}" alt="">
-        <div class="tit-desc-panel">
-            <h4>博客</h4>
-            <p>为什么 OnePlus 5 的灰色，要比以往更深一些？</p>
-        </div>
-    </a>
-    <a href="#">
-        <img  src="{% static 'images/index/index-six.jpg' %}" alt="">
-        <div class="tit-desc-panel">
-            <h4>博客</h4>
-            <p>为什么 OnePlus 5 的灰色，要比以往更深一些？</p>
-        </div>
-    </a>
+        {% for blog_article in hot_blog_articles %}
+            <a href="/blog/article/{{ blog_article.id }}">
+                <img  src="/uploads/{{ blog_article.top_img }}" alt="">
+                <div class="tit-desc-panel">
+                <h4>{{ blog_article.category }}</h4>
+                <p>{{ blog_article.title }}</p>
+                </div>
+            </a>
+        {% endfor %}
     </div>
 </section>
 <!--第四部分主体 结束-->

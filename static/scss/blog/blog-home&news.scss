@@ -42,7 +42,8 @@
     button{
       width:40px;
       height:40px;
-      background: url("../../images/blog/icon.png") 9px -205px no-repeat #eb0028;
+      cursor: pointer;
+      background: url("../../images/common/icon.png") 9px -205px no-repeat #eb0028;
       border: 1px solid #d70226;
     }
   }
@@ -117,10 +118,13 @@
       display: inline-block;
       width: 18px;
       height: 16px;
-      background-image: url("../../images/blog/icon.png");
+      background-image: url("../../images/common/icon.png");
       background-repeat: no-repeat;
       &.i-like{
         background-position: 0 -143px;
+        &.active{
+          background-position: 0 -165px;
+        }
       }
       &.i-praise{
         background-position:-1px -186px;

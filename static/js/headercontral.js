@@ -4,7 +4,6 @@
 
 var bodyheight = $(document.body).height();
 $("#filter").height(bodyheight);
-console.log(bodyheight);
 //大屏幕下点击搜索按钮
 $("#index-search").click(function () {
     $(".header-mid").hide();
@@ -55,3 +54,27 @@ $(".less528-footer-title").click(function () {
 $(window).resize(function(){
     console.log($(window).width());
 });
+
+//已经登录之后hover用户
+var users = $(".j-loginin");
+console.log(users);
+users.hover(function () {
+    console.log("logout");
+    $(".logout").show();
+},function () {
+    $(".logout").hover(function () {
+        $(".logout").show();
+    },function () {
+        $(".logout").hide();
+    });
+});
+
+//视频播放器
+function videoBox(){
+    var nWindow=$(window).height();
+    $(".video-box").css({height:nWindow});
+    $(".video-box-btn").click(function () {
+        $(".video-box").css({display:"none"});
+    });
+}
+videoBox();

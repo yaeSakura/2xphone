@@ -15,4 +15,7 @@ admin.site.register(navbars_blog)
 admin.site.register(Category)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment)
-
+admin.site.register(Series)
+admin.site.register(Picture)
+admin.site.register(Picture2, ArticleAdmin)
+admin.site.register(Video)

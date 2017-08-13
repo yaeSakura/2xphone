@@ -24,7 +24,20 @@
   padding: 0 30px  0 0;
   border-right: 1px solid #dfdfdf; }
   .login_input label {
-    display: block; }
+    display: block;
+    position: relative; }
+    .login_input label span {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 12px;
+      color: #cb0028;
+      z-index: 2;
+      background: #fed9d9;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 20px;
+      display: none; }
   .login_input input {
     background: #fcfcfc;
     font-size: 14px;
@@ -48,17 +61,32 @@
   text-align: right; }
 
 .login_btn {
-  background: #eb0028;
   width: 100%;
   height: 50px;
   text-align: center;
   line-height: 50px;
   border-radius: 4px;
-  margin: 14px 0 12px; }
-  .login_btn a {
+  margin: 14px 0 12px;
+  position: relative; }
+  .login_btn button {
     display: block;
     color: #ffffff;
-    font-size: 14px; }
+    font-size: 14px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #eb0028; }
+    .login_btn button:before {
+      content: '';
+      width: 1px;
+      background: rgba(215, 2, 38, 0.4);
+      transition: width .15s ease 0s;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 0; }
+    .login_btn button:hover:before {
+      width: 100%; }
 
 .login_sign {
   color: #666;
@@ -79,7 +107,21 @@
     font-size: 14px;
     border: 1px solid #dfdfdf;
     color: #333;
-    cursor: pointer; }
+    cursor: pointer;
+    position: relative; }
+    .login_share a:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: #000;
+      opacity: 0;
+      transition: opacity .2s; }
+    .login_share a:hover:before {
+      opacity: .1;
+      transition: opacity .2s; }
   .login_share i {
     display: inline-block;
     background-image: url("../../images/common/icons-login.png");
@@ -102,8 +144,6 @@
   margin-bottom: 20px; }
 .sign .login_btn {
   border-radius: 0; }
-.sign .login_forget {
-  display: none; }
 .sign .sign_agree {
   font-size: 12px;
   color: #5e5e5e;
@@ -112,11 +152,10 @@
     font-size: 12px; }
     .sign .sign_agree a:hover {
       color: #eb0028; }
-.sign .login_sign {
-  display: none; }
+.sign .login_drag {
+  width: 300px; }
 
 .sign_login {
-  display: block;
   height: 20px;
   width: 100%;
   text-align: right;
@@ -132,6 +171,9 @@
     margin-right: -5px; }
   .sign_login:hover {
     color: #eb0028; }
+
+.login .bgred {
+  background: #fed9d9; }
 
 @media screen and (max-width: 740px) {
   .login .login_box {

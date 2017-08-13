@@ -1,0 +1,15 @@
+{% load staticfiles %}
+<div class="recommendation">
+            <h3>热点推荐</h3>
+            <ul class="recommendation-inner">
+                {% for hot_article in hot_articles %}
+                <li>
+                    <a class="clearfix" href="/blog/article/{{ hot_article.id }}">
+                        <img src="/uploads/{{ hot_article.top_img }}" alt="">
+                        <span class="recommendation-desc">
+                            <span class="recommendation-desc-text">{{ hot_article.title }}</span></span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>

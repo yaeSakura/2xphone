@@ -1,0 +1,10 @@
+{% load staticfiles %}
+        <div class="searchbox">
+            <div class="searchbox-inner">
+                <form action="/blog/search" method="post">
+                    {% csrf_token %}
+                    <input class="input" type="text" name="blog_search" title="search">
+                    <button><input type="hidden"></button>
+                </form>
+            </div>
+        </div>

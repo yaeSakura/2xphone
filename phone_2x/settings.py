@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'srrw&t92zoa=4zb_ksyr&ntx_rh(3lw6d79jl9r)nw+3r&9*p^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.hzqsakura.cc']
 
 
 # Application definition
@@ -90,10 +90,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mainphone',
-        'USER': 'root',
-        'PASSWORD': '',
-        # 'HOST': '',
-        # 'PORT': '',
+        'USER': 'hzq',
+        'PASSWORD': 'hzq123',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
 
